@@ -11,6 +11,7 @@ class Icon : public QObject
 public:
     explicit Icon(QObject *parent = nullptr);
     QString getIcon() const;
+    QJsonObject syncIcons();
 
 public slots:
     void setIcon(const QString &pid);
