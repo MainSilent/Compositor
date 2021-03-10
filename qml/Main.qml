@@ -13,11 +13,21 @@ WaylandCompositor {
             width: 1024
             height: 720
             visible: true
+            visibility: Qt.WindowFullScreen
 
+            // Background
+            Rectangle {
+                anchors.fill: parent
+                color: "gray"
+            }
+
+            // Show Windows
             Repeater {
                 model: shellSurfaces
                 ShellSurfaceItem {
+                    autoCreatePopupItems: true
                     shellSurface: modelData
+                    onSurfaceDestroyed: shellSurfaces.remove(index)
                 }
             }
         }
@@ -30,18 +40,9 @@ WaylandCompositor {
         },
         XdgShell {
             onToplevelCreated: shellSurfaces.append({shellSurface: xdgSurface})
-            onPopupCreated: shellSurfaces.append({shellSurface: xdgSurface})
-        },
-        XdgShellV5 {
-            onXdgSurfaceCreated: shellSurfaces.append({shellSurface: xdgSurface})
-            onXdgPopupCreated: shellSurfaces.append({shellSurface: xdgPopup})
         },
         XdgShellV6 {
             onToplevelCreated: shellSurfaces.append({shellSurface: xdgSurface})
-            onPopupCreated: shellSurfaces.append({shellSurface: xdgSurface})
-        },
-        IviApplication {
-            onIviSurfaceCreated: shellSurfaces.append({shellSurface: iviSurface})
         }
     ]
 
