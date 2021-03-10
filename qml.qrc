@@ -2,5 +2,7 @@
     <qresource prefix="/">
         <file>qml/Main.qml</file>
         <file>qml/Desktop.qml</file>
+
+        <file>images/dock/defaultApp.png</file>
     </qresource>
 </RCC>

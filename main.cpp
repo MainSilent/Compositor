@@ -1,11 +1,15 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 
+#include <icon.h>
+
 int main(int argc, char *argv[])
 {
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
     QGuiApplication app(argc, argv);
+
+    qmlRegisterType<Icon>("Backend", 1, 0, "Icon");
 
     QQmlApplicationEngine engine;
     const QUrl url(QStringLiteral("qrc:/qml/Main.qml"));

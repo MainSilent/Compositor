@@ -15,10 +15,8 @@ WaylandCompositor {
             visible: true
             visibility: Qt.WindowFullScreen
 
-            // Background
-            Rectangle {
-                anchors.fill: parent
-                color: "gray"
+            Desktop {
+                shellSurfaces: shellSurfaces
             }
 
             // Show Windows
