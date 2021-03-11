@@ -2,9 +2,14 @@
     <qresource prefix="/">
         <file>qml/Main.qml</file>
         <file>qml/Desktop.qml</file>
-        <file>images/dock/defaultApp.png</file>
-         <file>images/dock/AppsList.png</file>
         <file>qml/OpenApps.qml</file>
         <file>qml/AppsList.qml</file>
+
+        <file>images/dock/defaultApp.png</file>
+        <file>images/dock/AppsList.png</file>
+        <file>images/dock/shutdown.png</file>
+        <file>images/dock/restart.png</file>
+        <file>images/dock/sleep.png</file>
+        <file>images/dock/lock.png</file>
     </qresource>
 </RCC>

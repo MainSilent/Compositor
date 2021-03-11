@@ -1,6 +1,6 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
-
+#include <QQmlContext>
 #include <apps.h>
 #include <icon.h>
 
@@ -10,11 +10,13 @@ int main(int argc, char *argv[])
 
     QGuiApplication app(argc, argv);
 
-    qmlRegisterType<Apps>("Backend", 1, 0, "Apps");
-    qmlRegisterType<Icon>("Backend", 1, 0, "Icon");
     Icon icon;
+    qmlRegisterType<Icon>("Backend", 1, 0, "Icon");
 
     QQmlApplicationEngine engine;
+    Apps apps;
+    engine.rootContext()->setContextProperty("apps", apps.getApps());
+
     const QUrl url(QStringLiteral("qrc:/qml/Main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
                      &app, [url](QObject *obj, const QUrl &objUrl) {
