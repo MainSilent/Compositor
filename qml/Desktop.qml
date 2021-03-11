@@ -14,11 +14,8 @@ Rectangle {
         anchors.bottom: parent.bottom
         color: "#55000000"
 
-        Row {
-            anchors.centerIn: parent
-            spacing: 6
+        AppsList {}
 
-            OpenApps {}
-        }
+        OpenApps {}
     }
 }

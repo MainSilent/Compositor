@@ -3,6 +3,8 @@
         <file>qml/Main.qml</file>
         <file>qml/Desktop.qml</file>
         <file>images/dock/defaultApp.png</file>
+         <file>images/dock/AppsList.png</file>
         <file>qml/OpenApps.qml</file>
+        <file>qml/AppsList.qml</file>
     </qresource>
 </RCC>
