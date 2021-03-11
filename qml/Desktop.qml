@@ -71,11 +71,15 @@ Rectangle {
                         }
                     }
 
+                    // Mouse Hover, Double click close
                     MouseArea {
                         id: mouseDockIcon
                         anchors.fill: parent
                         hoverEnabled: true
                         cursorShape: Qt.PointingHandCursor
+                        // onClick should enable focus
+                        onClicked: console.log("focus")
+                        onDoubleClicked: modelData.toplevel.sendClose()
                     }
                 }
             }

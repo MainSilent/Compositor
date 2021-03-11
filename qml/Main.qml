@@ -5,7 +5,7 @@ import Backend 1.0
 
 WaylandCompositor {
     id: compositor
-    
+
     defaultOutput: WaylandOutput {
         sizeFollowsWindow: true
 
