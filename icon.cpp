@@ -1,14 +1,8 @@
 #include "icon.h"
-#include <QDir>
-#include <QDebug>
-#include <QProcess>
-#include <QJsonObject>
-#include <QDirIterator>
-#include <QJsonDocument>
 
 Icon::Icon(QObject *parent) : QObject(parent)
 {
-
+    syncIcons();
 }
 
 QString Icon::getIcon() const
