@@ -2,12 +2,6 @@
 #define ICON_H
 
 #include <QObject>
-#include <QDir>
-#include <QDebug>
-#include <QProcess>
-#include <QJsonObject>
-#include <QDirIterator>
-#include <QJsonDocument>
 
 class Icon : public QObject
 {
