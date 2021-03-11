@@ -1,5 +1,6 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.12
+import QtWayland.Compositor 1.3
 import Backend 1.0
 
 Rectangle {
@@ -42,6 +43,32 @@ Rectangle {
                         Icon { id: appIcon }
 
                         Component.onCompleted: appIcon.setIcon(pid)
+                    }
+
+                    // Thumbnail
+                    Rectangle {
+                        x: -75
+                        y: -210
+                        height: 200
+                        width: 200
+                        color: "#55000000"
+                        radius: 5
+                        visible: mouseDockIcon.containsMouse
+
+                        WaylandQuickItem {
+                            height: 170
+                            width: parent.width
+                            sizeFollowsSurface: false
+                            touchEventsEnabled: false
+                            surface: modelData.surface
+                        }
+
+                        Text {
+                            text: title
+                            y: 175
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            color: "#aaffffff"
+                        }
                     }
 
                     MouseArea {

@@ -16,7 +16,7 @@ QString Icon::getIcon() const
     return path;
 }
 
-QJsonObject Icon::syncIcons()
+void Icon::syncIcons()
 {
     // paths are in $XDG_DATA_DIRS [/usr/local/share/, /usr/share/, /var/lib/snapd/desktop, ~/.local/share]
     QJsonObject iconsData;
@@ -78,13 +78,17 @@ QJsonObject Icon::syncIcons()
     QFile jsonFile("/home/"+username+"/.cache/neo/compositor/icons.cache");
     jsonFile.open(QFile::WriteOnly);
     jsonFile.write(doc.toJson());
-
-    return iconsData;
 }
 
 void Icon::setIcon(const QString &pid)
 {
-    QJsonObject jsonIcons = syncIcons();
+    QString username = qgetenv("USER");
+    if (username.isEmpty())
+        username = qgetenv("USERNAME");
+
+    QFile jsonFile("/home/"+username+"/.cache/neo/compositor/icons.cache");
+    jsonFile.open(QFile::ReadOnly);
+    QJsonObject jsonIcons = QJsonDocument().fromJson(jsonFile.readAll()).object();
 
     // Get program path by pid
     QProcess process;

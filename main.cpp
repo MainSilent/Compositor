@@ -10,6 +10,8 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
 
     qmlRegisterType<Icon>("Backend", 1, 0, "Icon");
+    Icon icon;
+    icon.syncIcons();
 
     QQmlApplicationEngine engine;
     const QUrl url(QStringLiteral("qrc:/qml/Main.qml"));
