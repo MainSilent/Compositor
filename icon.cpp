@@ -1,6 +1,7 @@
 #include "icon.h"
 #include <QDir>
 #include <QDebug>
+#include <QProcess>
 #include <QJsonObject>
 #include <QDirIterator>
 #include <QJsonDocument>
@@ -83,8 +84,43 @@ QJsonObject Icon::syncIcons()
 
 void Icon::setIcon(const QString &pid)
 {
-    QJsonObject data = syncIcons();
-    //path = "qrc:/images/dock/defaultApp.png";
+    QJsonObject jsonIcons = syncIcons();
+
+    // Get program path by pid
+    QProcess process;
+    process.start("readlink -f /proc/"+pid+"/exe");
+    process.waitForFinished(-1);
+    QString ExecPath = process.readAllStandardOutput().replace("\n", "");
+    QString stderr = process.readAllStandardError();
+
+    // Search for the icon
+    if (stderr.isEmpty()) {
+        foreach(const QString& key, jsonIcons.keys()) {
+            if (key.contains(ExecPath.split("/").last())) {
+                QString targetStr = jsonIcons.value(key).toString();
+                QFileInfoList hitList;
+                QString directory = "/usr/share/icons/"; // Where to search
+                QDirIterator it(directory, QDirIterator::Subdirectories);
+
+                while (it.hasNext()) {
+                    QString filename = it.next();
+                    QFileInfo file(filename);
+
+                    if (file.isDir()) continue;
+                    if (file.fileName().contains(targetStr, Qt::CaseInsensitive))
+                        hitList.append(file);
+                }
+
+                foreach (QFileInfo hit, hitList) {
+                    path = "file:/"+hit.absoluteFilePath();
+                    break;
+                }
+            }
+        }
+    }
+
+    if (path.isEmpty())
+        path = "qrc:/images/dock/defaultApp.png";
 
     emit iconChanged();
 }

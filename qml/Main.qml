@@ -13,7 +13,7 @@ WaylandCompositor {
             width: 1024
             height: 720
             visible: true
-            visibility: Qt.WindowFullScreen
+            //visibility: Qt.WindowFullScreen
 
             Desktop {
                 shellSurfaces: shellSurfaces
