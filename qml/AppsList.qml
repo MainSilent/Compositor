@@ -105,11 +105,54 @@ Rectangle {
                 width: parent.width - 61
                 color: "transparent"
 
-                Repeater {
+                GridView {
+                    id: appsListGrid
+                    anchors.fill: parent
                     model: apps
 
-                    Text {
-                        text: modelData[1]
+                    clip: true
+
+                    // App
+                    delegate: Item {
+                        width: appsListGrid.cellWidth
+                        height: appsListGrid.cellHeight
+
+                        Rectangle {
+                            anchors.fill: parent
+                            anchors.margins: 4
+                            color: mouseApp.containsMouse ? "#22000000" : "transparent"
+                            border.color: "#55000000"
+                            border.width: 2
+                            radius: 4
+                            clip: true
+
+                            Image {
+                                y: 5
+                                width: parent.width - 28
+                                height: parent.height - 28
+                                anchors.horizontalCenter: parent.horizontalCenter
+                                source: "qrc:/images/dock/defaultApp.png"
+                            }
+
+                            Text {
+                                text: modelData[0]
+                                anchors {
+                                    left: parent.left
+                                    bottom: parent.bottom
+                                    leftMargin: 4
+                                    bottomMargin: 3
+                                }
+                                font.pixelSize: 13
+                                color: "#aaffffff"
+                            }
+
+                            MouseArea {
+                                id: mouseApp
+                                anchors.fill: parent
+                                hoverEnabled: true
+                                cursorShape: "PointingHandCursor"
+                            }
+                        }
                     }
                 }
             }
