@@ -5,6 +5,7 @@
         <file>qml/OpenApps.qml</file>
         <file>qml/AppsList.qml</file>
 
+        <file>images/background.jpg</file>
         <file>images/dock/defaultApp.png</file>
         <file>images/dock/AppsList.png</file>
         <file>images/dock/shutdown.png</file>

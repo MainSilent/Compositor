@@ -5,7 +5,7 @@ import Backend 1.0
 Rectangle {
     height: 60
     width: height
-    color: mouseAppsList.containsMouse ? "#22000000" : "transparent"
+    color: mouseAppsList.containsMouse ? "#22ffffff" : "transparent"
     anchors.verticalCenter: parent.verticalCenter
     anchors.left: parent.left
 
@@ -22,7 +22,7 @@ Rectangle {
         height: 600
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 65
-        color: "#55000000"
+        color: "#ee000000"
         visible: false
         clip: true
 
@@ -114,7 +114,7 @@ Rectangle {
                     font.pixelSize: 20
                     selectionColor: "#55000000"
                     focus: true
-                    onVisibleChanged: visible === false ? text = "" : none
+                    onVisibleChanged: if (visible === false) text = ""
                 }
 
                 GridView {
@@ -139,7 +139,7 @@ Rectangle {
                             anchors.fill: parent
                             anchors.margins: 4
                             color: mouseApp.containsMouse ? "#22ffffff" : "transparent"
-                            border.color: "#55000000"
+                            border.color: "#55ffffff"
                             border.width: 2
                             radius: 4
                             clip: true

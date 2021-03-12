@@ -4,7 +4,11 @@ import QtQuick.Controls 2.12
 Rectangle {
     property ListModel shellSurfaces: []
     anchors.fill: parent
-    color: "gray"
+
+    Image {
+        anchors.fill: parent
+        source: "qrc:/images/background.jpg"
+    }
 
     // Dock
     Rectangle {
