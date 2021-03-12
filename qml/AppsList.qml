@@ -107,9 +107,14 @@ Rectangle {
 
                 GridView {
                     id: appsListGrid
-                    anchors.fill: parent
+                    x: 20
+                    width: parent.width
+                    anchors {
+                        top: parent.top
+                        bottom: parent.bottom
+                        margins: 8
+                    }
                     model: apps
-
                     clip: true
 
                     // App
@@ -131,7 +136,7 @@ Rectangle {
                                 width: parent.width - 28
                                 height: parent.height - 28
                                 anchors.horizontalCenter: parent.horizontalCenter
-                                source: "qrc:/images/dock/defaultApp.png"
+                                source: modelData[2]
                             }
 
                             Text {
