@@ -7,6 +7,12 @@
 
 int main(int argc, char *argv[])
 {
+    char platform_arg[10] = "-platform";
+    char eglfs_arg[6] = "eglfs";
+    argv[1] = platform_arg;
+    argv[2] = eglfs_arg;
+    argc = 3;
+
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
     QGuiApplication app(argc, argv);
