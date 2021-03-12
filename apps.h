@@ -12,6 +12,7 @@ class Apps : public QObject
 public:
     explicit Apps(QObject *parent = nullptr);
     QJsonArray getApps() const;
+    void getIcon(QString &iconName) const;
 
 public slots:
     void setApps(const QJsonArray &newApps);

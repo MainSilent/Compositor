@@ -57,8 +57,11 @@ QJsonArray Apps::getApps() const
                 }
             }
 
+            // Check the icon
             if (Icon.isEmpty())
                 Icon = "qrc:/images/dock/defaultApp.png";
+            else
+                getIcon(Icon);
 
             if (!Name.isEmpty() && !Exec.isEmpty())
                 appsData.append(QJsonValue(QJsonArray({Name, Exec, Icon})));
@@ -68,6 +71,30 @@ QJsonArray Apps::getApps() const
     }
 
     return appsData;
+}
+
+void Apps::getIcon(QString &iconName) const
+{
+    QFileInfoList hitList;
+    QString directory = "/usr/share/icons/"; // Where to search
+    QDirIterator it(directory, QDirIterator::Subdirectories);
+
+    while (it.hasNext()) {
+        QString filename = it.next();
+        QFileInfo file(filename);
+
+        if (file.isDir()) continue;
+        if (file.fileName().contains(iconName, Qt::CaseInsensitive))
+            hitList.append(file);
+    }
+
+    foreach (QFileInfo hit, hitList) {
+        iconName = "file:/"+hit.absoluteFilePath();
+        break;
+    }
+
+    if (hitList.length() == 0)
+        iconName = "qrc:/images/dock/defaultApp.png";
 }
 
 void Apps::setApps(const QJsonArray &newApps)
