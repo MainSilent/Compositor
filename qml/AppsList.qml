@@ -1,4 +1,5 @@
 import QtQuick 2.12
+import QtQuick.Controls 2.12
 import Backend 1.0
 
 Rectangle {
@@ -22,7 +23,6 @@ Rectangle {
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 65
         color: "#55000000"
-        radius: 5
         visible: false
         clip: true
 
@@ -105,6 +105,18 @@ Rectangle {
                 width: parent.width - 61
                 color: "transparent"
 
+                TextInput {
+                    id: search
+                    x: 26; y: 14
+                    width: parent.width - 40
+                    height: 40
+                    color: "#55ffffff"
+                    font.pixelSize: 20
+                    selectionColor: "#55000000"
+                    focus: true
+                    onVisibleChanged: visible === false ? text = "" : none
+                }
+
                 GridView {
                     id: appsListGrid
                     x: 20
@@ -113,8 +125,9 @@ Rectangle {
                         top: parent.top
                         bottom: parent.bottom
                         margins: 8
+                        topMargin: 40
                     }
-                    model: apps
+                    model: apps.filter(data => data[0].toLowerCase().includes(search.text.toLowerCase()))
                     clip: true
 
                     // App
@@ -169,7 +182,7 @@ Rectangle {
         id: mouseAppsList
         anchors.fill: parent
         hoverEnabled: true
-        onClicked: appsListView.visible = false
+        onClicked: appsListView.visible = appsListView.visible ? false : true
         onEntered: appsListView.visible = true
     }
 
