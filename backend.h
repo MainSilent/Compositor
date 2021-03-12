@@ -8,6 +8,7 @@ class Backend : public QObject
     Q_OBJECT
 public:
     explicit Backend(QObject *parent = nullptr);
+    Q_INVOKABLE void run(QString path);
     Q_INVOKABLE void power(QString action);
 
 signals:

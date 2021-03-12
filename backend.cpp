@@ -7,6 +7,11 @@ Backend::Backend(QObject *parent) : QObject(parent)
 
 }
 
+void Backend::run(QString path)
+{
+    QProcess::startDetached(path);
+}
+
 void Backend::power(QString action)
 {
     if (action == "Shutdown")

@@ -2,13 +2,11 @@ import QtQuick 2.12
 import Backend 1.0
 
 Rectangle {
-    height: 50
+    height: 60
     width: height
     color: mouseAppsList.containsMouse ? "#22000000" : "transparent"
     anchors.verticalCenter: parent.verticalCenter
     anchors.left: parent.left
-    anchors.leftMargin: 3
-    radius: 5
 
     // Icon logo in dock
     Image {
@@ -18,12 +16,14 @@ Rectangle {
 
     // Apps listview
     Rectangle {
+        id: appsListView
         width: 700
         height: 600
         anchors.bottom: parent.bottom
-        anchors.bottomMargin: 60
+        anchors.bottomMargin: 65
         color: "#55000000"
         radius: 5
+        visible: false
         clip: true
 
         Row {
@@ -69,7 +69,7 @@ Rectangle {
                         Rectangle {
                             height: 50
                             width: height
-                            color: mousePowerActionList.containsMouse ? "#22000000" : "transparent"
+                            color: mousePowerActionList.containsMouse ? "#22ffffff" : "transparent"
                             radius: 5
 
                             Image {
@@ -125,7 +125,7 @@ Rectangle {
                         Rectangle {
                             anchors.fill: parent
                             anchors.margins: 4
-                            color: mouseApp.containsMouse ? "#22000000" : "transparent"
+                            color: mouseApp.containsMouse ? "#22ffffff" : "transparent"
                             border.color: "#55000000"
                             border.width: 2
                             radius: 4
@@ -156,6 +156,7 @@ Rectangle {
                                 anchors.fill: parent
                                 hoverEnabled: true
                                 cursorShape: "PointingHandCursor"
+                                onClicked: backend.run(modelData[1])
                             }
                         }
                     }
@@ -168,7 +169,8 @@ Rectangle {
         id: mouseAppsList
         anchors.fill: parent
         hoverEnabled: true
-        cursorShape: Qt.PointingHandCursor
+        onClicked: appsListView.visible = false
+        onEntered: appsListView.visible = true
     }
 
     Backend {

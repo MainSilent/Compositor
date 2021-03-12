@@ -52,7 +52,7 @@ QJsonArray Apps::getApps() const
                     }
                     else if (KeyVal[0] == "Icon") {
                         KeyVal.removeFirst();
-                        Icon = KeyVal.join("=");
+                        //Icon = KeyVal.join("=");
                     }
                 }
             }
