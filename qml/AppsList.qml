@@ -1,4 +1,5 @@
 import QtQuick 2.12
+import Backend 1.0
 
 Rectangle {
     height: 50
@@ -39,25 +40,28 @@ Rectangle {
                     id: powerList
 
                     ListElement {
-                        name: "Shutdown"
-                        icon: "qrc:/images/dock/shutdown.png"
-                    }
-                    ListElement {
-                        name: "Restart"
-                        icon: "qrc:/images/dock/restart.png"
+                        name: "Lock"
+                        icon: "qrc:/images/dock/lock.png"
                     }
                     ListElement {
                         name: "Sleep"
                         icon: "qrc:/images/dock/sleep.png"
                     }
                     ListElement {
-                        name: "Lock"
-                        icon: "qrc:/images/dock/lock.png"
+                        name: "Restart"
+                        icon: "qrc:/images/dock/restart.png"
+                    }
+                    ListElement {
+                        name: "Shutdown"
+                        icon: "qrc:/images/dock/shutdown.png"
                     }
                 }
 
                 Column {
-                    anchors.fill: parent
+                    anchors.bottom: parent.bottom
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    anchors.bottomMargin: 10
+                    spacing: 7
 
                     Repeater {
                         model: powerList
@@ -65,24 +69,22 @@ Rectangle {
                         Rectangle {
                             height: 50
                             width: height
-                            anchors.bottom: parent.bottom
-                            anchors.horizontalCenter: parent.horizontalCenter
-                            anchors.bottomMargin: 10
-                            color: mouseShutdownActionList.containsMouse ? "#22000000" : "transparent"
+                            color: mousePowerActionList.containsMouse ? "#22000000" : "transparent"
                             radius: 5
 
                             Image {
                                 width: parent.width - 10
                                 height: width
                                 anchors.centerIn: parent
-                                source: "qrc:/images/dock/shutdown.png"
+                                source: icon
                             }
 
                             MouseArea {
-                                id: mouseShutdownActionList
+                                id: mousePowerActionList
                                 anchors.fill: parent
                                 hoverEnabled: true
                                 cursorShape: Qt.PointingHandCursor
+                                onClicked: backend.power(name)
                             }
                         }
                     }
@@ -119,5 +121,9 @@ Rectangle {
         anchors.fill: parent
         hoverEnabled: true
         cursorShape: Qt.PointingHandCursor
+    }
+
+    Backend {
+        id: backend
     }
 }

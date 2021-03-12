@@ -8,6 +8,7 @@ CONFIG += c++11
 
 SOURCES += \
         apps.cpp \
+        backend.cpp \
         icon.cpp \
         main.cpp
 
@@ -26,4 +27,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     apps.h \
+    backend.h \
     icon.h

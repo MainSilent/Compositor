@@ -1,6 +1,7 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
+#include <backend.h>
 #include <apps.h>
 #include <icon.h>
 
@@ -12,6 +13,7 @@ int main(int argc, char *argv[])
 
     Icon icon;
     qmlRegisterType<Icon>("Backend", 1, 0, "Icon");
+    qmlRegisterType<Backend>("Backend", 1, 0, "Backend");
 
     QQmlApplicationEngine engine;
     Apps apps;
