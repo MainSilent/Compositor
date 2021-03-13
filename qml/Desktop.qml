@@ -16,7 +16,7 @@ Rectangle {
         width: parent.width
         height: 60
         anchors.bottom: parent.bottom
-        color: "#55000000"
+        color: "#55ffffff"
 
         AppsList {}
 
